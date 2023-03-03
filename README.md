@@ -11,3 +11,9 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
+
+```
+CID: bafybeiespnplmuajnos766asoa52bienq2v6kfblnz6425kzef6l6z77vi
+IPFS URL: ipfs://bafybeiespnplmuajnos766asoa52bienq2v6kfblnz6425kzef6l6z77vi
+Gateway URL: https://nftstorage.link/ipfs/bafybeiespnplmuajnos766asoa52bienq2v6kfblnz6425kzef6l6z77vi
+```
