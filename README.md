@@ -12,8 +12,5 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 
-```
-CID: bafybeiespnplmuajnos766asoa52bienq2v6kfblnz6425kzef6l6z77vi
-IPFS URL: ipfs://bafybeiespnplmuajnos766asoa52bienq2v6kfblnz6425kzef6l6z77vi
-Gateway URL: https://nftstorage.link/ipfs/bafybeiespnplmuajnos766asoa52bienq2v6kfblnz6425kzef6l6z77vi
-```
+https://testnets.opensea.io/assets/goerli/0x8258a9d5173cd293fc77b8535e91278316f6cfaa/0/
+

@@ -3,15 +3,13 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract myNFT is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
-    string private _baseTokenURI;
 
-    constructor(string memory baseTokenURI) ERC721("sid's NFT", "XID") {
-        _baseTokenURI = baseTokenURI;
-    }
+    constructor() ERC721("sid's NFT", "XID") {}
 
     function safeMint() public {
         require(
@@ -24,18 +22,24 @@ contract myNFT is ERC721 {
         _tokenIdCounter.increment();
     }
 
-    function _baseURI() internal view override returns (string memory) {
-        return _baseTokenURI;
+    function _baseURI() internal pure override returns (string memory) {
+        return
+            "https://bafybeiaktykjqbfagyy6qsxp54rctadowseaadcyrgaqi7asvmwyeiwgmu.ipfs.nftstorage.link";
     }
 
     function tokenURI(uint256 tokenId)
         public
-        view
+        pure
         override
         returns (string memory)
     {
         string memory _tokenURI = string(
-            abi.encodePacked(_baseURI(), "/", tokenId, ".json")
+            abi.encodePacked(
+                _baseURI(),
+                "/",
+                Strings.toString(tokenId),
+                ".json"
+            )
         );
         return _tokenURI;
     }
