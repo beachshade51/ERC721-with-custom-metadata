@@ -1,46 +1,36 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-contract myNFT is ERC721 {
+contract myNFT is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
-    Counters.Counter private _tokenIdCounter;
+    Counters.Counter private _tokenIds;
 
-    constructor() ERC721("sid's NFT", "XID") {}
+    constructor() ERC721("MyNFT", "NFT") {}
 
-    function safeMint() public {
-        require(
-            !_exists(_tokenIdCounter.current()),
-            "user already has one NFT"
-        );
-
-        uint256 tokenId = _tokenIdCounter.current();
-        _safeMint(msg.sender, tokenId);
-        _tokenIdCounter.increment();
-    }
-
-    function _baseURI() internal pure override returns (string memory) {
-        return
-            "https://bafybeiaktykjqbfagyy6qsxp54rctadowseaadcyrgaqi7asvmwyeiwgmu.ipfs.nftstorage.link";
-    }
-
-    function tokenURI(uint256 tokenId)
+    function mintNFT(address recipient, string memory tokenURI)
         public
-        pure
-        override
+        onlyOwner
+        returns (uint256)
+    {
+        _tokenIds.increment();
+
+        uint256 newItemId = _tokenIds.current();
+        _mint(recipient, newItemId);
+        _setTokenURI(newItemId, tokenURI);
+
+        return newItemId;
+    }
+
+    function updateTokenURI(uint256 tokenId, string memory tokenURI)
+        public
         returns (string memory)
     {
-        string memory _tokenURI = string(
-            abi.encodePacked(
-                _baseURI(),
-                "/",
-                Strings.toString(tokenId),
-                ".json"
-            )
-        );
-        return _tokenURI;
+        _setTokenURI(tokenId, tokenURI);
+        return tokenURI;
     }
 }

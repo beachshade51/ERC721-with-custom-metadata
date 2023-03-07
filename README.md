@@ -14,3 +14,4 @@ npx hardhat run scripts/deploy.js
 
 https://testnets.opensea.io/assets/goerli/0x8258a9d5173cd293fc77b8535e91278316f6cfaa/0/
 
+Contract Addressk 0x8258a9D5173CD293Fc77B8535E91278316F6cFAa
